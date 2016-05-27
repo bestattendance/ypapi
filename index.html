@@ -35,7 +35,8 @@
       if (url && url.length > 1) {
         url = decodeURIComponent(url[1]);
       } else {
-        url = "http://petstore.swagger.io/v2/swagger.json";
+        // TODO: Disable CORS support in .htaccess when moving this over to prod.
+        url = "http://tabby.local/assets/apispecs/members.json";
       }
 
       // Pre load translate...
