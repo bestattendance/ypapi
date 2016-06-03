@@ -1,0 +1,642 @@
+{
+    "swagger": "2.1.4",
+    "info": {
+        "version": "1.0.0",
+        "title": "YouthPros Best Attendance API"
+    },
+    "host": "tabby.local",
+    "basePath": "/",
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/api_members/create": {
+            "post": {
+                "summary": "Create a member",
+                "operationId": "createMember",
+                "tags": [
+                    "members"
+                ],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "formData",
+                        "description": "YouthPros API key",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_secret",
+                        "in": "formData",
+                        "description": "YouthPros API secret",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "organization_id",
+                        "in": "formData",
+                        "description": "Organization ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "first_name",
+                        "in": "formData",
+                        "description": "First name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "last_name",
+                        "in": "formData",
+                        "description": "Last name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "email_address",
+                        "in": "formData",
+                        "description": "Email address",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "allow_login",
+                        "in": "formData",
+                        "description": "Whether or not the user is allowed to log in to Best Attendance; 0 for false, 1 for true; default 0",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "role",
+                        "in": "formData",
+                        "description": "One of: 'Administrator', 'Group Leader', 'Member'.  Default 'Member'.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "phone",
+                        "in": "formData",
+                        "description": "10 digit phone number; numerals only",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "address1",
+                        "in": "formData",
+                        "description": "Address line 1",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "address2",
+                        "in": "formData",
+                        "description": "Addresss line 2",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "city",
+                        "in": "formData",
+                        "description": "City",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "state",
+                        "in": "formData",
+                        "description": "Two character state abbreviation",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "zip",
+                        "in": "formData",
+                        "description": "Five digit integer zip code",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Member created",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "success or fail"
+                                },
+                                "data": {
+                                    "type": "string",
+                                    "description": "A JSON representation of the new member"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Invalid credentials",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "Invalid credentials"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Required fields were missing",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "Missing required field: {field name}"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "A request method other than post was used.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "A request method other than post was used."
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The organization_id was missing or does not correspond to a valid organization",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "The organization_id was missing or does not correspond to a valid organization"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "An invalid role was specified.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "An invalid role was specified."
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid data was provided for at least one of the fields",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "Validation errors occurred"
+                                },
+                                "errors": {
+                                    "type": "string",
+                                    "description": "An object of validation errors, indexed by field name"
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "A member with the provided first and last name already exists",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "A member with the provided first and last name already exists"
+                                }
+                            }
+                        }
+                    },
+                    "429": {
+                        "description": "The API rate limit of 300 members per day has been exceeded.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "The API rate limit of 300 members per day has been exceeded."
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "There was an error saving the member.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "There was an error saving the member."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+
+
+
+
+        "/api_organizations/create": {
+            "post": {
+                "summary": "Create an organization.  The organization owner automatically gets the Administrator role and has allow_login set to true.",
+                "operationId": "createOrganization",
+                "tags": [
+                    "organizations"
+                ],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "formData",
+                        "description": "YouthPros API key",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_secret",
+                        "in": "formData",
+                        "description": "YouthPros API secret",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "organization_name",
+                        "in": "formData",
+                        "description": "The name of the organization",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "timezone",
+                        "in": "formData",
+                        "description": "The time zone for the organization, must be one of: http://php.net/manual/en/timezones.php",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "first_name",
+                        "in": "formData",
+                        "description": "First name of the account owner",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "last_name",
+                        "in": "formData",
+                        "description": "Last name of the account owner",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "email_address",
+                        "in": "formData",
+                        "description": "Email address of the account owner",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "phone",
+                        "in": "formData",
+                        "description": "10 digit phone number of the account owner; numerals only",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "address1",
+                        "in": "formData",
+                        "description": "Address line 1 of the account owner",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "address2",
+                        "in": "formData",
+                        "description": "Addresss line 2 of the account owner",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "city",
+                        "in": "formData",
+                        "description": "City of the account owner",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "state",
+                        "in": "formData",
+                        "description": "Two character state abbreviation of the account owner",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "zip",
+                        "in": "formData",
+                        "description": "Five digit integer zip code of the account owner",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Organization created",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "success or fail"
+                                },
+                                "data": {
+                                    "type": "string",
+                                    "description": "A JSON representation containing one organization and one member."
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Invalid credentials",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "Invalid credentials"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Required fields were missing",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "Missing required field: {field name}"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "A request method other than post was used.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "A request method other than post was used."
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid data was provided for at least one of the fields",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "Validation errors occurred"
+                                },
+                                "errors": {
+                                    "type": "string",
+                                    "description": "An object of validation errors, indexed by field name"
+                                }
+                            }
+                        }
+                    },
+                    "429": {
+                        "description": "The API rate limit of 300 members per day has been exceeded.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "The API rate limit of 300 members per day has been exceeded."
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "There was an error saving the member or organization.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "There was an error saving the member or organization."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+
+
+
+
+
+        "/api_organizations/cancel": {
+            "post": {
+                "summary": "Deactivates an organization, blocking all login attempts from members to this organization.",
+                "operationId": "createOrganization",
+                "tags": [
+                    "organizations"
+                ],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "formData",
+                        "description": "YouthPros API key",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_secret",
+                        "in": "formData",
+                        "description": "YouthPros API secret",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "organization_id",
+                        "in": "formData",
+                        "description": "The id of the organization",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The organization was succesffully deactivated.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "success"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "The organization was successfully deactivated."
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Invalid credentials",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "Invalid credentials"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Required fields were missing",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "Missing required field: organization_id"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "A request method other than post was used.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "A request method other than post was used."
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "An internal error occurred.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "An internal error occurred."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+    }
+}
