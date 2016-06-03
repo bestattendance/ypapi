@@ -4,7 +4,7 @@
         "version": "1.0.0",
         "title": "YouthPros Best Attendance API"
     },
-    "host": "tabby.local",
+    "host": "https://youthpros.bestattendance.com",
     "basePath": "/",
     "schemes": [
         "http"
