@@ -333,6 +333,27 @@
                         "type": "string"
                     },
                     {
+                        "name": "login_url",
+                        "in": "formData",
+                        "description": "The login url of the client site.  Users will be redirected here after being logged out of Best Atendance. If not provided, will redirect to bestattendance.com",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "image_url",
+                        "in": "formData",
+                        "description": "The logo to display in the header.  Must be 120px x 50px.  If not provided, the Best Attendance logo will be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "header_color",
+                        "in": "formData",
+                        "description": "The background color of the Best Attendance header.  If not provided, default blue gradient will be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
                         "name": "first_name",
                         "in": "formData",
                         "description": "First name of the account owner",
