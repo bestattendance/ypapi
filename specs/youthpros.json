@@ -508,6 +508,13 @@
                         "type": "string"
                     },
                     {
+                        "name": "organization_id",
+                        "in": "formData",
+                        "description": "Organization ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
                         "name": "start_timestamp",
                         "in": "query",
                         "description": "Unix timestamp (start date of event list)",
