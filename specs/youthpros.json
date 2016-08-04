@@ -509,7 +509,7 @@
                     },
                     {
                         "name": "organization_id",
-                        "in": "formData",
+                        "in": "query",
                         "description": "Organization ID",
                         "required": true,
                         "type": "integer"
