@@ -349,7 +349,14 @@
                     {
                         "name": "header_color",
                         "in": "formData",
-                        "description": "The background color of the Best Attendance header.  If not provided, default blue gradient will be used.",
+                        "description": "The background color of the Best Attendance header (do not include the leading #).  If not provided, default blue gradient will be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "secondary_color",
+                        "in": "formData",
+                        "description": "The bottom border color of the Best Attendance header (do not include the leading #).  If not provided, default orange color will be used.",
                         "required": false,
                         "type": "string"
                     },
@@ -537,6 +544,180 @@
                 }
             }
         },
+
+
+
+
+        "/api_organizations/update": {
+            "post": {
+                "summary": "Update an existing organization.",
+                "operationId": "createOrganization",
+                "tags": [
+                    "organizations"
+                ],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "formData",
+                        "description": "YouthPros API key",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_secret",
+                        "in": "formData",
+                        "description": "YouthPros API secret",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "organization_id",
+                        "in": "formData",
+                        "description": "The id of the organization to update",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "image_url",
+                        "in": "formData",
+                        "description": "The logo to display in the header.  Must be 120px x 50px.  If not provided, the Best Attendance logo will be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "header_color",
+                        "in": "formData",
+                        "description": "The background color of the Best Attendance header (do not include the leading #).  If not provided, default blue gradient will be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "secondary_color",
+                        "in": "formData",
+                        "description": "The bottom border color of the Best Attendance header (do not include the leading #).  If not provided, default orange color will be used.",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Organization updated",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "success or fail"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Invalid credentials",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "Invalid credentials"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Required fields were missing",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "Missing required field: {field name}"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "A request method other than post was used.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "A request method other than post was used."
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid data was provided for at least one of the fields",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "Validation errors occurred"
+                                },
+                                "errors": {
+                                    "type": "string",
+                                    "description": "An object of validation errors, indexed by field name"
+                                }
+                            }
+                        }
+                    },
+                    "429": {
+                        "description": "The API rate limit of 300 members per day has been exceeded.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "The API rate limit of 300 members per day has been exceeded."
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "There was an error updating the organization.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "There was an error updating the organization."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+
+
 
 
 
