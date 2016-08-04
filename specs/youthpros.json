@@ -121,6 +121,34 @@
                         "description": "Five digit integer zip code",
                         "required": false,
                         "type": "integer"
+                    },
+                    {
+                        "name": "guardian1_name",
+                        "in": "formData",
+                        "description": "Guardian 1 Name",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "guardian1_phone",
+                        "in": "formData",
+                        "description": "Guardian 1 Phone; 10 digits, numerals only",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "guardian2_name",
+                        "in": "formData",
+                        "description": "Guardian 2 Name",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "guardian2_phone",
+                        "in": "formData",
+                        "description": "Guardian 2 Phone; 10 digits, numerals only",
+                        "required": false,
+                        "type": "string"
                     }
                 ],
                 "responses": {
