@@ -495,28 +495,28 @@
                 "parameters": [
                     {
                         "name": "api_key",
-                        "in": "formData",
+                        "in": "query",
                         "description": "YouthPros API key",
                         "required": true,
                         "type": "string"
                     },
                     {
                         "name": "api_secret",
-                        "in": "formData",
+                        "in": "query",
                         "description": "YouthPros API secret",
                         "required": true,
                         "type": "string"
                     },
                     {
                         "name": "start_timestamp",
-                        "in": "formData",
+                        "in": "query",
                         "description": "Unix timestamp (start date of event list)",
                         "required": false,
                         "type": "integer"
                     },
                     {
                         "name": "end_timestamp",
-                        "in": "formData",
+                        "in": "query",
                         "description": "Unix timestamp (end date of event list)",
                         "required": false,
                         "type": "integer"
