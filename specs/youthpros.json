@@ -323,6 +323,168 @@
 
 
 
+        "/api_groups/create": {
+            "post": {
+                "summary": "Create a group",
+                "operationId": "createGroup",
+                "tags": [
+                    "groups"
+                ],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "formData",
+                        "description": "YouthPros API key",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_secret",
+                        "in": "formData",
+                        "description": "YouthPros API secret",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "organization_id",
+                        "in": "formData",
+                        "description": "Organization ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "group_name",
+                        "in": "formData",
+                        "description": "First name",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Group created",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "success or fail"
+                                },
+                                "data": {
+                                    "type": "string",
+                                    "description": "A JSON representation of the new group"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Invalid credentials",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "Invalid credentials"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Required fields were missing",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "Missing required field: {field name}"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "A request method other than post was used.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "A request method other than post was used."
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The organization_id was missing or does not correspond to a valid organization",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "The organization_id was missing or does not correspond to a valid organization"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid data was provided for at least one of the fields",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "Validation errors occurred"
+                                },
+                                "errors": {
+                                    "type": "string",
+                                    "description": "An object of validation errors, indexed by field name"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "There was an error saving the group.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "There was an error saving the group."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+
+
+
+
 
         "/api_organizations/create": {
             "post": {
