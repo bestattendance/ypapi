@@ -485,6 +485,115 @@
 
 
 
+        "/api_events/index": {
+            "get": {
+                "summary": "List events",
+                "operationId": "listEvents",
+                "tags": [
+                    "events"
+                ],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "formData",
+                        "description": "YouthPros API key",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_secret",
+                        "in": "formData",
+                        "description": "YouthPros API secret",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "start_timestamp",
+                        "in": "formData",
+                        "description": "Unix timestamp (start date of event list)",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "end_timestamp",
+                        "in": "formData",
+                        "description": "Unix timestamp (end date of event list)",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "success or fail"
+                                },
+                                "data": {
+                                    "type": "string",
+                                    "description": "A JSON representation of all events matching the date filters"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Invalid credentials",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "Invalid credentials"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Required fields were missing",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "Missing required field: {field name}"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The organization_id was missing or does not correspond to a valid organization",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "The organization_id was missing or does not correspond to a valid organization"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+
+
+
 
         "/api_organizations/create": {
             "post": {
