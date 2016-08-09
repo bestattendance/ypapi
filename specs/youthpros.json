@@ -513,20 +513,6 @@
                         "description": "Organization ID",
                         "required": true,
                         "type": "integer"
-                    },
-                    {
-                        "name": "start_timestamp",
-                        "in": "query",
-                        "description": "Unix timestamp (start date of event list)",
-                        "required": false,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "end_timestamp",
-                        "in": "query",
-                        "description": "Unix timestamp (end date of event list)",
-                        "required": false,
-                        "type": "integer"
                     }
                 ],
                 "responses": {
