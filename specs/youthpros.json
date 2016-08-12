@@ -387,51 +387,9 @@
                         "type": "integer"
                     },
                     {
-                        "name": "role",
-                        "in": "formData",
-                        "description": "One of: 'Administrator', 'Group Leader', 'Member'.  Default 'Member'.",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
                         "name": "phone",
                         "in": "formData",
                         "description": "10 digit phone number; numerals only",
-                        "required": false,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "address1",
-                        "in": "formData",
-                        "description": "Address line 1",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "address2",
-                        "in": "formData",
-                        "description": "Addresss line 2",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "city",
-                        "in": "formData",
-                        "description": "City",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "state",
-                        "in": "formData",
-                        "description": "Two character state abbreviation",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "zip",
-                        "in": "formData",
-                        "description": "Five digit integer zip code",
                         "required": false,
                         "type": "integer"
                     },
@@ -465,18 +423,14 @@
                     }
                 ],
                 "responses": {
-                    "201": {
-                        "description": "Member created",
+                    "200": {
+                        "description": "Member update",
                         "schema": {
                             "type": "object",
                             "properties": {
                                 "status": {
                                     "type": "string",
                                     "description": "success or fail"
-                                },
-                                "data": {
-                                    "type": "string",
-                                    "description": "A JSON representation of the new member"
                                 }
                             }
                         }
@@ -546,7 +500,7 @@
                         }
                     },
                     "400": {
-                        "description": "An invalid role was specified.",
+                        "description": "The member_id was missing or does not correspond to a valid member.",
                         "schema": {
                             "type": "object",
                             "properties": {
@@ -556,7 +510,7 @@
                                 },
                                 "message": {
                                     "type": "string",
-                                    "description": "An invalid role was specified."
+                                    "description": "The member_id was missing or does not correspond to a valid member."
                                 }
                             }
                         }
@@ -597,24 +551,8 @@
                             }
                         }
                     },
-                    "429": {
-                        "description": "The API rate limit of 300 members per day has been exceeded.",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "status": {
-                                    "type": "string",
-                                    "description": "fail"
-                                },
-                                "message": {
-                                    "type": "string",
-                                    "description": "The API rate limit of 300 members per day has been exceeded."
-                                }
-                            }
-                        }
-                    },
                     "500": {
-                        "description": "There was an error saving the member.",
+                        "description": "There was an error updating the member.",
                         "schema": {
                             "type": "object",
                             "properties": {
@@ -624,7 +562,7 @@
                                 },
                                 "message": {
                                     "type": "string",
-                                    "description": "There was an error saving the member."
+                                    "description": "There was an error updating the member."
                                 }
                             }
                         }
@@ -634,6 +572,357 @@
         },
 
 
+
+
+
+        "/api_members/assign": {
+            "post": {
+                "summary": "Assign an existing member to an existing group",
+                "operationId": "assignMemberToGroup",
+                "tags": [
+                    "members"
+                ],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "formData",
+                        "description": "YouthPros API key",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_secret",
+                        "in": "formData",
+                        "description": "YouthPros API secret",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "organization_id",
+                        "in": "formData",
+                        "description": "Organization ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "member_id",
+                        "in": "formData",
+                        "description": "Member ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "group_id",
+                        "in": "formData",
+                        "description": "Group ID",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "success or fail"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Invalid credentials",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "Invalid credentials"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Required fields were missing",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "Missing required field: {field name}"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "A request method other than post was used.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "A request method other than post was used."
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The organization_id was missing or does not correspond to a valid organization",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "The organization_id was missing or does not correspond to a valid organization"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The member_id was missing or does not correspond to a valid member",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "The member_id was missing or does not correspond to a valid member"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The group_id was missing or does not correspond to a valid group",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "The group_id was missing or does not correspond to a valid group"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "There was an error assigning the member to the group.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "There was an error assigning the member to the group."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+
+
+
+        "/api_members/unassign": {
+            "post": {
+                "summary": "Unassign an existing member from an existing group",
+                "operationId": "unassignMemberFromGroup",
+                "tags": [
+                    "members"
+                ],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "formData",
+                        "description": "YouthPros API key",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_secret",
+                        "in": "formData",
+                        "description": "YouthPros API secret",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "organization_id",
+                        "in": "formData",
+                        "description": "Organization ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "member_id",
+                        "in": "formData",
+                        "description": "Member ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "group_id",
+                        "in": "formData",
+                        "description": "Group ID",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "success or fail"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Invalid credentials",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "Invalid credentials"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Required fields were missing",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "Missing required field: {field name}"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "A request method other than post was used.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "A request method other than post was used."
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The organization_id was missing or does not correspond to a valid organization",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "The organization_id was missing or does not correspond to a valid organization"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The member_id was missing or does not correspond to a valid member",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "The member_id was missing or does not correspond to a valid member"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The group_id was missing or does not correspond to a valid group",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "The group_id was missing or does not correspond to a valid group"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "There was an error assigning the member to the group.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "There was an error assigning the member to the group."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
 
 
 
@@ -965,6 +1254,139 @@
         },
 
 
+        "/api_groups/delete": {
+            "post": {
+                "summary": "Delete an existing group",
+                "operationId": "deleteGroup",
+                "tags": [
+                    "groups"
+                ],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "formData",
+                        "description": "YouthPros API key",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_secret",
+                        "in": "formData",
+                        "description": "YouthPros API secret",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "organization_id",
+                        "in": "formData",
+                        "description": "Organization ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "group_id",
+                        "in": "formData",
+                        "description": "Group ID",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Group deleted",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "success or fail"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Invalid credentials",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "Invalid credentials"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Required fields were missing",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "Missing required field: {field name}"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "A request method other than post was used.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "A request method other than post was used."
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The organization_id was missing or does not correspond to a valid organization",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "The organization_id was missing or does not correspond to a valid organization"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "There was an error deleting the group.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "There was an error deleting the group."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
 
 
 
