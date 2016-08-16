@@ -420,6 +420,13 @@
                         "description": "Guardian 2 Phone; 10 digits, numerals only",
                         "required": false,
                         "type": "string"
+                    },
+                    {
+                        "name": "role",
+                        "in": "formData",
+                        "description": "One of: 'Administrator', 'Group Leader', 'Member'.  Default 'Member'.",
+                        "required": false,
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -1417,6 +1424,13 @@
                         "name": "organization_id",
                         "in": "query",
                         "description": "Organization ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "member_id",
+                        "in": "query",
+                        "description": "Member ID",
                         "required": true,
                         "type": "integer"
                     }
