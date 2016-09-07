@@ -1430,22 +1430,8 @@
                     {
                         "name": "member_id",
                         "in": "query",
-                        "description": "Member ID. Only one of (member_id, location_id, group_id) must be provided.",
-                        "required": false,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "location_id",
-                        "in": "query",
-                        "description": "Location ID. Only one of (member_id, location_id, group_id) must be provided.",
-                        "required": false,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "group_id",
-                        "in": "query",
-                        "description": "Group ID. Only one of (member_id, location_id, group_id) must be provided.",
-                        "required": false,
+                        "description": "Member ID",
+                        "required": true,
                         "type": "integer"
                     }
                 ],
