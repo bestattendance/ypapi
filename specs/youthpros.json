@@ -932,6 +932,107 @@
         },
 
 
+        "/api_groups/index": {
+            "get": {
+                "summary": "List groups",
+                "operationId": "listGroups",
+                "tags": [
+                    "groups"
+                ],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "query",
+                        "description": "YouthPros API key",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_secret",
+                        "in": "query",
+                        "description": "YouthPros API secret",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "organization_id",
+                        "in": "query",
+                        "description": "Organization ID",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "success or fail"
+                                },
+                                "data": {
+                                    "type": "string",
+                                    "description": "A JSON representation of all groups matching the date filters"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Invalid credentials",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "Invalid credentials"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Required fields were missing",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "Missing required field: {field name}"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The organization_id was missing or does not correspond to a valid organization",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "The organization_id was missing or does not correspond to a valid organization"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+
+
 
         "/api_groups/create": {
             "post": {
