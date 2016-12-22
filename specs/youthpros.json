@@ -1674,6 +1674,13 @@
                         "type": "string"
                     },
                     {
+                        "name": "menu_text_color",
+                        "in": "formData",
+                        "description": "The text color for the main menu.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
                         "name": "first_name",
                         "in": "formData",
                         "description": "First name of the account owner",
@@ -1908,6 +1915,13 @@
                         "name": "secondary_color",
                         "in": "formData",
                         "description": "The bottom border color of the Best Attendance header (do not include the leading #).  If not provided, default orange color will be used.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "menu_text_color",
+                        "in": "formData",
+                        "description": "The text color for the main menu.",
                         "required": false,
                         "type": "string"
                     }
