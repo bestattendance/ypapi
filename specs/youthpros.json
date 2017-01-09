@@ -956,6 +956,13 @@
                         "type": "string"
                     },
                     {
+                        "name": "organization_id",
+                        "in": "query",
+                        "description": "Organization ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
                         "name": "member_id",
                         "in": "query",
                         "description": "Member ID",
