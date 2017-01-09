@@ -932,6 +932,124 @@
         },
 
 
+
+        "/api_members/groups": {
+            "get": {
+                "summary": "Return an array of groups to which the member is assigned.",
+                "operationId": "assignMemberToGroup",
+                "tags": [
+                    "members"
+                ],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "query",
+                        "description": "YouthPros API key",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "api_secret",
+                        "in": "query",
+                        "description": "YouthPros API secret",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "member_id",
+                        "in": "query",
+                        "description": "Member ID",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "groupId": {
+                                        "type": "integer"
+                                    },
+                                    "groupName": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Invalid credentials",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "Invalid credentials"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Required fields were missing",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "Missing required field: {field name}"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "A request method other than get was used.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "A request method other than post was used."
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "The member_id was missing or does not correspond to a valid member",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "description": "fail"
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "The member_id was missing or does not correspond to a valid member"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+
         "/api_groups/index": {
             "get": {
                 "summary": "List groups",
