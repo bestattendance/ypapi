@@ -1194,14 +1194,14 @@
                         "type": "integer"
                     },
                     {
-                        "name": "firstName",
+                        "name": "first_name",
                         "in": "query",
                         "description": "First name",
                         "required": true,
                         "type": "string"
                     },
                     {
-                        "name": "lastName",
+                        "name": "last_name",
                         "in": "query",
                         "description": "Last name",
                         "required": true,
